@@ -45,7 +45,7 @@ public class TaskService {
                 .orElseThrow(()->new RuntimeException("Task not found with id: "+id));
 
         existingTask.setTitle(updatedTask.getTitle());
-        existingTask.setCompleted(updatedTask.isCompleted());
+        existingTask.setCompleted(updatedTask.getCompleted());
 
         return taskRepository.save(existingTask);
     }
@@ -57,7 +57,7 @@ public class TaskService {
         if(partialfields.getTitle() != null){
             existingTask.setTitle(partialfields.getTitle());
         }
-        existingTask.setCompleted(partialfields.isCompleted());
+        existingTask.setCompleted(partialfields.getCompleted());
 
         return taskRepository.save(existingTask);
     }
