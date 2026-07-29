@@ -18,14 +18,30 @@ public class TaskController {
     public String getHelloMessage(){
         return "Welcome";
     }
+
     @GetMapping
     public List<Task> getAllTasks(){
         return taskService.getAllTasks();
     }
 
+    @GetMapping("/{id}")
+    public Task getTaskById(@PathVariable Long id){
+        return taskService.getTaskById(id);
+    }
+
     @PostMapping
     public Task createTask(@RequestBody Task task){
         return taskService.createTask(task);
+    }
+
+    @PutMapping("/{id}")
+    public Task updateTask(@PathVariable Long id, @RequestBody Task updatedTask){
+        return taskService.updateTask(id,updatedTask);
+    }
+
+    @PatchMapping("/{id}")
+    public Task patchTask(@PathVariable Long id, Task partialFields){
+        return taskService.patchTask(id, partialFields);
     }
 
     @DeleteMapping("/{id}")

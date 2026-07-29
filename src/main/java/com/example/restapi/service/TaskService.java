@@ -17,6 +17,12 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
+    public Task getTaskById(Long id) {
+        return taskRepository.findById(id).orElseThrow(
+                ()-> new RuntimeException("Task not found with id: "+id)
+        );
+    }
+
     public Task createTask(@RequestBody Task task){
         if(task.getTitle() == null || task.getTitle().isEmpty()){
             throw new IllegalArgumentException("Task title cannot be Empty!");
@@ -33,4 +39,27 @@ public class TaskService {
         taskRepository.delete(existingTask);
 //        taskRepository.deleteById(id);
     }
+
+    public Task updateTask(Long id, Task updatedTask) {
+        Task existingTask = taskRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("Task not found with id: "+id));
+
+        existingTask.setTitle(updatedTask.getTitle());
+        existingTask.setCompleted(updatedTask.isCompleted());
+
+        return taskRepository.save(existingTask);
+    }
+
+    public Task patchTask(Long id, Task partialfields) {
+        Task existingTask = taskRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("Task not found with id: "+id));
+
+        if(partialfields.getTitle() != null){
+            existingTask.setTitle(partialfields.getTitle());
+        }
+        existingTask.setCompleted(partialfields.isCompleted());
+
+        return taskRepository.save(existingTask);
+    }
+
 }
