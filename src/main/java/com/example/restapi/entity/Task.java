@@ -12,11 +12,11 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private boolean completed;
+    private Boolean completed;
 
     public Task(){}
 
-    public Task(String title, boolean completed) {
+    public Task(String title, Boolean completed) {
         this.title = title;
         this.completed = completed;
     }
@@ -37,11 +37,11 @@ public class Task {
         this.title = title;
     }
 
-    public boolean getCompleted() {
+    public Boolean getCompleted() {
         return completed;
     }
 
-    public void setCompleted(boolean completed) {
+    public void setCompleted(Boolean completed) {
         this.completed = completed;
     }
 }

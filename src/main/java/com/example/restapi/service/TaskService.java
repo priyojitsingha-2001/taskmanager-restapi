@@ -50,15 +50,16 @@ public class TaskService {
         return taskRepository.save(existingTask);
     }
 
-    public Task patchTask(Long id, Task partialfields) {
+    public Task patchTask(Long id, Task partialFields) {
         Task existingTask = taskRepository.findById(id)
                 .orElseThrow(()->new RuntimeException("Task not found with id: "+id));
 
-        if(partialfields.getTitle() != null){
-            existingTask.setTitle(partialfields.getTitle());
+        if(partialFields.getTitle() != null){
+            existingTask.setTitle(partialFields.getTitle());
         }
-        existingTask.setCompleted(partialfields.getCompleted());
-
+        if(partialFields.getCompleted() != null){
+            existingTask.setCompleted(partialFields.getCompleted());
+        }
         return taskRepository.save(existingTask);
     }
 
