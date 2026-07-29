@@ -40,7 +40,7 @@ public class TaskController {
     }
 
     @PatchMapping("/{id}")
-    public Task patchTask(@PathVariable Long id, Task partialFields){
+    public Task patchTask(@PathVariable Long id,@RequestBody Task partialFields){
         return taskService.patchTask(id, partialFields);
     }
 
